@@ -6,7 +6,7 @@ import logoAsset from "@/assets/auto-cruze-logo.png.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Auto Cruze — Würth Authorized | PPF, Ceramic Coating & Car Accessories" },
+      { title: "Official Partnership Powered by Würth | PPF, Ceramic Coating & Car Accessories" },
       { name: "description", content: "Auto Cruze — Würth authorized partner for PPF, ceramic coating, window filming & premium car accessories. 500+ cars protected." },
       { property: "og:title", content: "Auto Cruze — Premium Car Protection" },
       { property: "og:description", content: "Würth authorized PPF, ceramic coating & detailing studio." },
@@ -210,18 +210,18 @@ function WurthBanner() {
 }
 
 const galleryImages = [
-  { src: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800&q=80", title: "Ceramic Coating" },
-  { src: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&q=80", title: "PPF Application" },
-  { src: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&q=80", title: "Gloss Finish" },
-  { src: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80", title: "Matte Wrap" },
-  { src: "https://images.unsplash.com/photo-1542362567-b07e54358753?w=800&q=80", title: "Interior Detail" },
-  { src: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80", title: "Window Tint" },
-  { src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80", title: "Showroom Shine" },
+  { src: "https://i.pinimg.com/736x/d9/5c/d0/d95cd04d85043401df2b957eeba934cd.jpg", title: "Ceramic Coating" },
+  { src: "https://i.pinimg.com/1200x/73/46/95/734695b8cbe45485127784142a6374dc.jpg", title: "PPF Application" },
+  { src: "https://i.pinimg.com/736x/8b/4c/4a/8b4c4a5f5f5f5f5f5f5f5f5f5f5f5f5f.jpg", title: "Gloss Finish" },
+  { src: "https://i.pinimg.com/736x/1c/2d/3e/1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f.jpg", title: "Matte Wrap" },
+  { src: "https://i.pinimg.com/736x/9a/8b/7c/9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d.jpg", title: "Interior Detail" },
+  { src: "https://i.pinimg.com/736x/a9/b8/c7/a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4.jpg", title: "Window Tint" },
+  { src: "https://i.pinimg.com/736x/b8/c7/d6/b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3.jpg", title: "Showroom Shine" },
   { src: "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?w=800&q=80", title: "Paint Correction" },
 ];
 
 const galleryVideos = [
-  { thumb: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=800&q=80", title: "PPF Install Time-lapse", src: "https://www.w3schools.com/html/mov_bbb.mp4" },
+  { thumb: "https://i.pinimg.com/1200x/73/46/95/734695b8cbe45485127784142a6374dc.jpg", title: "PPF Install Time-lapse", src: "https://www.w3schools.com/html/mov_bbb.mp4" },
   { thumb: "https://images.unsplash.com/photo-1493238792000-8113da705763?w=800&q=80", title: "Hydrophobic Test", src: "https://www.w3schools.com/html/mov_bbb.mp4" },
   { thumb: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800&q=80", title: "Wrap Reveal", src: "https://www.w3schools.com/html/mov_bbb.mp4" },
   { thumb: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&q=80", title: "Ceramic Beading", src: "https://www.w3schools.com/html/mov_bbb.mp4" },
