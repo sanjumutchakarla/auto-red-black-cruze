@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Shield, Sparkles, Square, Wrench, Layers, Droplets, Phone, MapPin, Clock, ChevronRight, Play, X, Images, Film, Sun, Moon } from "lucide-react";
 import logoAsset from "@/assets/auto-cruze-logo.png.asset.json";
+import wurthLogo from "@/assets/wurth-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
