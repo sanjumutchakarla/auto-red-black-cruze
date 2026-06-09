@@ -415,7 +415,15 @@ function Contact() {
               { icon: Phone, label: "Call Us", value: "+91 9515285124", href: "tel:9515285124" },
               { icon: MapPin, label: "Visit Studio", value: "Auto Cruze, Würth Authorized Center" },
               { icon: Clock, label: "Hours", value: "Mon – Sat · 9:30 AM – 8:30 PM" },
-...
+            ].map(c => (
+              <a key={c.label} href={c.href ?? "#"} className="flex items-start gap-4 border border-border bg-card p-5 transition-colors hover:border-primary">
+                <div className="hex-shield grid h-12 w-12 shrink-0 place-items-center bg-primary text-primary-foreground"><c.icon className="h-5 w-5" /></div>
+                <div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{c.label}</div>
+                  <div className="mt-1 font-display text-lg font-bold">{c.value}</div>
+                </div>
+              </a>
+            ))}
             <div className="border border-border bg-card p-5">
               <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground">GSTIN</div>
               <div className="mt-1 font-display text-lg font-bold tracking-wide">37BSVPR9136E1ZZ</div>
