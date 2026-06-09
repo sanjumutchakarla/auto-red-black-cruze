@@ -90,11 +90,14 @@ function ThemeToggle({ theme, toggle }: { theme: "dark" | "light"; toggle: () =>
   );
 }
 
-function LogoMark({ size = 40 }: { size?: number }) {
+function LogoMark({ size = 56 }: { size?: number }) {
   return (
-    <div className="grid place-items-center rounded-sm bg-black p-1" style={{ height: size, width: size }}>
-      <img src={logoAsset.url} alt="Auto Cruze" className="h-full w-full object-contain" />
-    </div>
+    <img
+      src={logoAsset.url}
+      alt="Auto Cruze"
+      style={{ height: size }}
+      className="w-auto object-contain"
+    />
   );
 }
 
