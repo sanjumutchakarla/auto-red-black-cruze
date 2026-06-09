@@ -104,26 +104,59 @@ function LogoMark({ size = 56 }: { size?: number }) {
 
 function Nav() {
   const { theme, toggle } = useTheme();
+  const [open, setOpen] = useState(false);
+  const links = ["Services", "Gallery", "Process", "Partner", "Contact"];
   return (
     <nav className="fixed top-0 z-40 w-full border-b border-border bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="#home" className="flex items-center gap-3">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-4 md:px-6">
+        <a href="#home" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <LogoMark />
           <div className="leading-tight">
-            <div className="font-display text-lg font-black tracking-wider">AUTO CRUZE</div>
+            <div className="font-display text-base font-black tracking-wider md:text-lg">AUTO CRUZE</div>
             <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Würth Authorized</div>
           </div>
         </a>
         <div className="hidden items-center gap-8 md:flex">
-          {["Services", "Gallery", "Process", "Partner", "Contact"].map(l => (
+          {links.map(l => (
             <a key={l} href={`#${l.toLowerCase()}`} className="text-sm font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-primary">{l}</a>
           ))}
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 md:gap-3">
           <ThemeToggle theme={theme} toggle={toggle} />
-          <a href="#contact" className="clip-angled bg-primary px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wider text-primary-foreground transition-transform hover:scale-105">Book Now</a>
+          <a href="#contact" className="clip-angled hidden bg-primary px-6 py-2.5 font-display text-sm font-bold uppercase tracking-wider text-primary-foreground transition-transform hover:scale-105 sm:inline-block">Book Now</a>
+          <button
+            onClick={() => setOpen(o => !o)}
+            aria-label="Toggle menu"
+            aria-expanded={open}
+            className="grid h-10 w-10 place-items-center border-2 border-border text-foreground transition-colors hover:border-primary hover:text-primary md:hidden"
+          >
+            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
         </div>
       </div>
+      {open && (
+        <div className="border-t border-border bg-background md:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col px-4 py-2">
+            {links.map(l => (
+              <a
+                key={l}
+                href={`#${l.toLowerCase()}`}
+                onClick={() => setOpen(false)}
+                className="border-b border-border/50 py-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground transition-colors hover:text-primary"
+              >
+                {l}
+              </a>
+            ))}
+            <a
+              href="#contact"
+              onClick={() => setOpen(false)}
+              className="clip-angled mt-3 mb-2 inline-block bg-primary px-6 py-2.5 text-center font-display text-sm font-bold uppercase tracking-wider text-primary-foreground sm:hidden"
+            >
+              Book Now
+            </a>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
