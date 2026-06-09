@@ -382,6 +382,28 @@ function Process() {
 }
 
 function Contact() {
+  const [form, setForm] = useState({ name: "", phone: "", service: services[0].title, message: "" });
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const name = form.name.trim().slice(0, 100);
+    const phone = form.phone.trim().slice(0, 20);
+    const service = form.service.trim().slice(0, 100);
+    const message = form.message.trim().slice(0, 1000);
+    if (!name || !phone) return;
+    const text =
+      `*New Enquiry - Auto Cruze*%0A%0A` +
+      `*Name:* ${encodeURIComponent(name)}%0A` +
+      `*Phone:* ${encodeURIComponent(phone)}%0A` +
+      `*Service:* ${encodeURIComponent(service)}%0A` +
+      `*Message:* ${encodeURIComponent(message || "-")}`;
+    window.open(`https://wa.me/919515285124?text=${text}`, "_blank", "noopener,noreferrer");
+    setSent(true);
+    setForm({ name: "", phone: "", service: services[0].title, message: "" });
+    setTimeout(() => setSent(false), 6000);
+  };
+
   return (
     <section id="contact" className="bg-surface py-24">
       <div className="mx-auto max-w-7xl px-6">
@@ -393,34 +415,30 @@ function Contact() {
               { icon: Phone, label: "Call Us", value: "+91 9515285124", href: "tel:9515285124" },
               { icon: MapPin, label: "Visit Studio", value: "Auto Cruze, Würth Authorized Center" },
               { icon: Clock, label: "Hours", value: "Mon – Sat · 9:30 AM – 8:30 PM" },
-            ].map(c => (
-              <a key={c.label} href={c.href ?? "#"} className="flex items-start gap-4 border border-border bg-card p-5 transition-colors hover:border-primary">
-                <div className="hex-shield grid h-12 w-12 shrink-0 place-items-center bg-primary text-primary-foreground"><c.icon className="h-5 w-5" /></div>
-                <div>
-                  <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{c.label}</div>
-                  <div className="mt-1 font-display text-lg font-bold">{c.value}</div>
-                </div>
-              </a>
-            ))}
+...
             <div className="border border-border bg-card p-5">
               <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground">GSTIN</div>
               <div className="mt-1 font-display text-lg font-bold tracking-wide">37BSVPR9136E1ZZ</div>
             </div>
           </div>
 
-          <form className="border border-border bg-card p-8" onSubmit={(e) => { e.preventDefault(); window.location.href = "tel:9515285124"; }}>
+          <form className="border border-border bg-card p-8" onSubmit={handleSubmit}>
             <h3 className="font-display text-2xl font-bold uppercase">Enquiry Form</h3>
             <div className="mt-6 space-y-4">
-              <input required placeholder="Your name" className="w-full border border-border bg-input px-4 py-3 text-sm outline-none focus:border-primary" />
-              <input required type="tel" placeholder="Phone number" className="w-full border border-border bg-input px-4 py-3 text-sm outline-none focus:border-primary" />
-              <select className="w-full border border-border bg-input px-4 py-3 text-sm outline-none focus:border-primary">
-                <option>Service interested in</option>
+              <input required maxLength={100} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className="w-full border border-border bg-input px-4 py-3 text-sm outline-none focus:border-primary" />
+              <input required type="tel" maxLength={20} pattern="[0-9+\-\s()]{7,20}" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="Phone number" className="w-full border border-border bg-input px-4 py-3 text-sm outline-none focus:border-primary" />
+              <select value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })} className="w-full border border-border bg-input px-4 py-3 text-sm outline-none focus:border-primary">
                 {services.map(s => <option key={s.title}>{s.title}</option>)}
               </select>
-              <textarea rows={4} placeholder="Tell us about your car" className="w-full border border-border bg-input px-4 py-3 text-sm outline-none focus:border-primary" />
+              <textarea rows={4} maxLength={1000} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Tell us about your car" className="w-full border border-border bg-input px-4 py-3 text-sm outline-none focus:border-primary" />
               <button type="submit" className="clip-angled w-full bg-primary px-8 py-4 font-display text-sm font-bold uppercase tracking-widest text-primary-foreground shadow-red transition-transform hover:scale-[1.02]">
-                Request Callback
+                Send via WhatsApp
               </button>
+              {sent && (
+                <div role="status" className="border border-[#25D366]/40 bg-[#25D366]/10 px-4 py-3 text-sm font-semibold text-[#25D366]">
+                  Thanks! Your enquiry has been sent on WhatsApp. We'll reply shortly.
+                </div>
+              )}
             </div>
           </form>
         </div>
