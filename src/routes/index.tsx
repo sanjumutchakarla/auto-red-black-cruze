@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Shield, Sparkles, Square, Wrench, Layers, Droplets, Phone, MapPin, Clock, ChevronRight, Play, X, Images, Film, Sun, Moon } from "lucide-react";
 import logoAsset from "@/assets/auto-cruze-logo.png.asset.json";
+import wurthLogo from "@/assets/wurth-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -193,7 +194,8 @@ function WurthBanner() {
   return (
     <section id="partner" className="relative overflow-hidden py-20" style={{ background: "var(--gradient-red)" }}>
       <div className="absolute inset-0 grid-bg opacity-20" />
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-[auto_1fr]">
+        <img src={wurthLogo.url} alt="Würth official partner" className="h-32 w-32 object-contain bg-background p-3" />
         <div>
           <div className="text-xs font-bold uppercase tracking-[0.3em] text-primary-foreground/80">Official Partnership</div>
           <h2 className="mt-2 font-display text-3xl font-black uppercase text-primary-foreground md:text-5xl">OFFICIAL PARTNERSHIP POWERED BY WÜRTH</h2>
