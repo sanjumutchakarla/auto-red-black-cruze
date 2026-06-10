@@ -384,28 +384,22 @@ function Process() {
 function Contact() {
   const [form, setForm] = useState({ name: "", phone: "", service: services[0].title, message: "" });
   const [sent, setSent] = useState(false);
+  const whatsappMessage =
+    `*New Enquiry - Auto Cruze*\n\n` +
+    `*Name:* ${form.name.trim().slice(0, 100)}\n` +
+    `*Phone:* ${form.phone.trim().slice(0, 20)}\n` +
+    `*Service:* ${form.service.trim().slice(0, 100)}\n` +
+    `*Message:* ${form.message.trim().slice(0, 1000) || "-"}`;
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
     const name = form.name.trim().slice(0, 100);
     const phone = form.phone.trim().slice(0, 20);
-    const service = form.service.trim().slice(0, 100);
-    const message = form.message.trim().slice(0, 1000);
-    if (!name || !phone) return;
-    const text = encodeURIComponent(
-      `*New Enquiry - Auto Cruze*\n\n` +
-        `*Name:* ${name}\n` +
-        `*Phone:* ${phone}\n` +
-        `*Service:* ${service}\n` +
-        `*Message:* ${message || "-"}`,
-    );
-    const url = `https://wa.me/919515285124?text=${text}`;
-    const win = window.open(url, "_blank", "noopener,noreferrer");
-    if (!win || win.closed || typeof win.closed === "undefined") {
-      window.location.href = url;
+    if (!name || !phone) {
+      e.preventDefault();
+      return;
     }
     setSent(true);
-    setForm({ name: "", phone: "", service: services[0].title, message: "" });
+    window.setTimeout(() => setForm({ name: "", phone: "", service: services[0].title, message: "" }), 400);
     setTimeout(() => setSent(false), 6000);
   };
 
@@ -435,9 +429,10 @@ function Contact() {
             </div>
           </div>
 
-          <form className="border border-border bg-card p-8" onSubmit={handleSubmit}>
+          <form className="border border-border bg-card p-8" action="https://wa.me/919515285124" method="get" target="_blank" onSubmit={handleSubmit}>
             <h3 className="font-display text-2xl font-bold uppercase">Enquiry Form</h3>
             <div className="mt-6 space-y-4">
+              <input type="hidden" name="text" value={whatsappMessage} />
               <input required maxLength={100} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" className="w-full border border-border bg-input px-4 py-3 text-sm outline-none focus:border-primary" />
               <input required type="tel" maxLength={20} pattern="[0-9+\-\s()]{7,20}" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="Phone number" className="w-full border border-border bg-input px-4 py-3 text-sm outline-none focus:border-primary" />
               <select value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })} className="w-full border border-border bg-input px-4 py-3 text-sm outline-none focus:border-primary">
