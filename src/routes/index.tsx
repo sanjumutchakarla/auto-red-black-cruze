@@ -400,13 +400,10 @@ function Contact() {
         `*Message:* ${message || "-"}`,
     );
     const url = `https://wa.me/919515285124?text=${text}`;
-    const a = document.createElement("a");
-    a.href = url;
-    a.target = "_blank";
-    a.rel = "noopener noreferrer";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    const win = window.open(url, "_blank", "noopener,noreferrer");
+    if (!win || win.closed || typeof win.closed === "undefined") {
+      window.location.href = url;
+    }
     setSent(true);
     setForm({ name: "", phone: "", service: services[0].title, message: "" });
     setTimeout(() => setSent(false), 6000);
