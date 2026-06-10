@@ -392,13 +392,21 @@ function Contact() {
     const service = form.service.trim().slice(0, 100);
     const message = form.message.trim().slice(0, 1000);
     if (!name || !phone) return;
-    const text =
-      `*New Enquiry - Auto Cruze*%0A%0A` +
-      `*Name:* ${encodeURIComponent(name)}%0A` +
-      `*Phone:* ${encodeURIComponent(phone)}%0A` +
-      `*Service:* ${encodeURIComponent(service)}%0A` +
-      `*Message:* ${encodeURIComponent(message || "-")}`;
-    window.open(`https://wa.me/919515285124?text=${text}`, "_blank", "noopener,noreferrer");
+    const text = encodeURIComponent(
+      `*New Enquiry - Auto Cruze*\n\n` +
+        `*Name:* ${name}\n` +
+        `*Phone:* ${phone}\n` +
+        `*Service:* ${service}\n` +
+        `*Message:* ${message || "-"}`,
+    );
+    const url = `https://wa.me/919515285124?text=${text}`;
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
     setSent(true);
     setForm({ name: "", phone: "", service: services[0].title, message: "" });
     setTimeout(() => setSent(false), 6000);
