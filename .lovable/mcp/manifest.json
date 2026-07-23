@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "sdk_version": "0.24.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "auto-cruze-mcp",
+      "version": "0.1.0",
+      "title": "Auto Cruze MCP"
+    },
+    "tools": [
+      {
+        "name": "get_services",
+        "title": "Get services",
+        "description": "List all car care services offered by Auto Cruze (PPF, ceramic coating, window filming, accessories, body wrapping, detailing).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_contact_info",
+        "title": "Get contact info",
+        "description": "Get Auto Cruze contact information: phone, WhatsApp, business hours, and partnership details.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "build_enquiry_link",
+        "title": "Build WhatsApp enquiry link",
+        "description": "Build a prefilled WhatsApp enquiry link to Auto Cruze for a customer. Returns a wa.me URL the customer can open to send the message.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Customer's name"
+            },
+            "phone": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Customer's phone number"
+            },
+            "service": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Service the customer is interested in"
+            },
+            "message": {
+              "description": "Additional message or details",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "phone",
+            "service"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
